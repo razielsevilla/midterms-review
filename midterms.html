@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midterms — Raziel Sevilla · Kada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family: 'Stinger Fit'; src: local('Stinger Fit'); font-weight: 700; }
+
+  :root {
+    --color-bg: #FFFDF6;
+    --color-bg-inset: #F8F0EA;
+    --color-surface: #FFFFFF;
+    --color-border: #0d0d0d;
+    --color-border-soft: #E7E2D8;
+    --color-border-softer: #EFEAE0;
+    --color-text: #14110d;
+    --color-text-secondary: #4a463f;
+    --color-text-tertiary: #8a8578;
+    --color-text-on-primary: #FFFFFF;
+
+    --color-primary: #00497A;
+    --color-primary-hover: #003a61;
+    --color-primary-subtle: #EAF3FA;
+    --color-secondary: #EB864C;
+    --color-secondary-hover: #d9743a;
+    --color-secondary-subtle: #FDECE0;
+
+    --color-success: #1c7a45;
+    --color-success-subtle: #E4F3E9;
+    --color-warning: #a9780a;
+    --color-warning-subtle: #FBF1DA;
+    --color-info: #2f6cbf;
+    --color-info-subtle: #E9F1FB;
+
+    --color-teal: #00d5bf;
+    --color-blue-light: #8EC8EF;
+    --color-yellow: #FAEB80;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    --shadow-card: 0 1px 3px rgba(20,17,13,0.08), 0 1px 2px rgba(20,17,13,0.05);
+    --shadow-raised: 0 8px 24px rgba(20,17,13,0.10);
+
+    --font-body: 'Manrope', sans-serif;
+    --font-display: 'Stinger Fit', 'Manrope', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 800; margin: 0; color: var(--color-text); text-wrap: balance; }
+  a { color: var(--color-primary); }
+  .muted { color: var(--color-text-secondary); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------------- topbar ---------------- */
+  .topbar {
+    background: var(--color-surface);
+    border-bottom: 2px solid var(--color-border);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark {
+    width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+    background: var(--color-primary); border: 2px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 14px;
+  }
+  .brand-text h2 { font-size: 16px; line-height: 1.15; }
+  .brand-text span { display: block; font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.02em; margin-top: 2px; }
+  .period-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border: 2px solid var(--color-border); border-radius: 999px;
+    background: var(--color-secondary-subtle); font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-secondary-hover);
+  }
+
+  /* ---------------- hero ---------------- */
+  .hero {
+    border-bottom: 2px solid var(--color-border);
+    background: linear-gradient(160deg, var(--color-blue-light), #a9d8f4);
+    padding: 48px 0;
+  }
+  .hero > .wrap {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: center;
+  }
+  .hero-eyebrow { display: block; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); margin-bottom: 10px; }
+  .hero h1 { font-size: 34px; color: var(--color-primary); }
+  .hero p.lede { margin-top: 10px; max-width: 46ch; font-size: 14.5px; color: #023a52; }
+
+  .hero-card {
+    background: var(--color-surface); border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg); box-shadow: var(--shadow-raised);
+    padding: 20px 22px;
+  }
+  .hero-card-top { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1.5px solid var(--color-border-soft); margin-bottom: 14px; }
+  .hero-avatar {
+    width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+    background: var(--color-primary); border: 2px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  }
+  .hero-card-name { font-family: var(--font-display); font-weight: 800; font-size: 15px; color: var(--color-text); }
+  .hero-card-role { font-size: 12px; color: var(--color-text-tertiary); margin-top: 2px; }
+  .hero-card-rows { display: flex; flex-direction: column; gap: 10px; }
+  .hero-card-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; font-size: 12.5px; }
+  .hero-card-row .k { color: var(--color-text-tertiary); font-weight: 700; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.04em; flex-shrink: 0; }
+  .hero-card-row .v { font-weight: 700; color: var(--color-text); text-align: right; }
+
+  @media (max-width: 720px) {
+    .hero > .wrap { grid-template-columns: 1fr; }
+  }
+
+  /* ---------------- sections ---------------- */
+  section.block { padding: 40px 0; }
+  section.block + section.block { border-top: 2px solid var(--color-border-softer); }
+  .section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  .section-head .muted { font-size: 12.5px; }
+  .title-row { display: flex; align-items: center; gap: 10px; }
+  .title-row h2 { font-size: 22px; }
+  .section-icon {
+    width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: #fff;
+  }
+  .section-icon svg { width: 16px; height: 16px; }
+  .section-icon-primary { background: var(--color-primary); }
+  .section-icon-secondary { background: var(--color-secondary); }
+
+  /* ---------------- stat tiles ---------------- */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .stat-tile {
+    background: var(--color-surface); border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: 16px 18px; box-shadow: var(--shadow-card);
+  }
+  .stat-icon {
+    width: 26px; height: 26px; border-radius: 8px; border: 1.5px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 10px; color: #fff;
+  }
+  .stat-icon svg { width: 15px; height: 15px; }
+  .stat-icon-primary { background: var(--color-primary); }
+  .stat-icon-secondary { background: var(--color-secondary); }
+  .stat-tile .stat-value { font-family: var(--font-display); font-weight: 800; font-size: 28px; color: var(--color-primary); }
+  .stat-tile .stat-label { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-text-tertiary); margin-top: 4px; }
+  .stat-tile .stat-note { font-size: 12px; color: var(--color-text-secondary); margin-top: 8px; }
+
+  /* ---------------- category tabs (visual only) ---------------- */
+  .tag-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+  .tag {
+    display: inline-flex; align-items: center; padding: 4px 12px; border-radius: var(--radius-md);
+    font-size: 11.5px; font-weight: 700; border: 1.5px solid var(--color-border);
+  }
+  .tag-primary { background: var(--color-primary-subtle); color: var(--color-primary); }
+  .tag-secondary { background: var(--color-secondary-subtle); color: var(--color-secondary-hover); }
+  .tag-success { background: var(--color-success-subtle); color: var(--color-success); }
+  .tag-info { background: var(--color-info-subtle); color: var(--color-info); }
+
+  /* ---------------- accomplishment cards ---------------- */
+  .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card {
+    background: var(--color-surface); border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg); box-shadow: var(--shadow-card);
+    padding: 18px 20px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .card-top h3 { font-size: 16px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: var(--radius-md);
+    font-size: 11px; font-weight: 700; white-space: nowrap; border: 1px solid transparent;
+  }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+  .pill-success { background: var(--color-success-subtle); color: var(--color-success); }
+  .pill-warning { background: var(--color-warning-subtle); color: var(--color-warning); }
+  .card p { margin: 0; color: var(--color-text-secondary); font-size: 13px; }
+  .card .impact {
+    margin-top: 4px; padding: 10px 12px; background: var(--color-bg-inset);
+    border-radius: var(--radius-md); border: 1px solid var(--color-border-soft);
+    font-size: 12.5px; color: var(--color-text);
+  }
+  .card .impact b { color: var(--color-primary); }
+  .card-foot { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+  .card-foot .avatar {
+    width: 22px; height: 22px; border-radius: 50%; background: var(--color-primary-subtle);
+    border: 1.5px solid var(--color-border); display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 800; color: var(--color-primary); flex-shrink: 0;
+  }
+  .card-foot span { font-size: 11.5px; color: var(--color-text-tertiary); font-weight: 600; }
+
+  /* ---------------- goals list ---------------- */
+  .goal-list { display: flex; flex-direction: column; gap: 10px; }
+  .goal-row {
+    display: grid; grid-template-columns: 28px 1fr 120px; align-items: center; gap: 14px;
+    padding: 14px 16px; background: var(--color-surface); border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .goal-row .num { font-family: var(--font-display); font-weight: 800; color: var(--color-secondary); font-size: 15px; }
+  .goal-row .title { font-weight: 700; font-size: 13.5px; }
+  .goal-row .sub { font-size: 12px; color: var(--color-text-tertiary); margin-top: 2px; }
+  .goal-row .status { justify-self: end; }
+
+  /* ---------------- reflection ---------------- */
+  .reflection {
+    background: var(--color-surface); border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-lg); box-shadow: var(--shadow-card);
+    padding: 24px 26px;
+  }
+  .reflection h3 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-text-tertiary); margin-bottom: 8px; }
+  .reflection p { margin: 0 0 14px; color: var(--color-text-secondary); font-size: 13.5px; }
+  .reflection p:last-child { margin-bottom: 0; }
+
+  /* ---------------- footer ---------------- */
+  footer { border-top: 2px solid var(--color-border); padding: 22px 0; }
+  footer .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  footer span { font-size: 12px; color: var(--color-text-tertiary); }
+
+  @media (max-width: 860px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .card-grid { grid-template-columns: 1fr; }
+    .goal-row { grid-template-columns: 24px 1fr; }
+    .goal-row .status { grid-column: 2; justify-self: start; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">K</div>
+        <div class="brand-text">
+          <h2>KadaKareer</h2>
+          <span>Midterm Accomplishments Report</span>
+        </div>
+      </div>
+      <div class="period-pill">● June 2026 – Present</div>
+    </div>
+  </header>
+
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <span class="hero-eyebrow">Midterm Review</span>
+        <h1>Raziel &#8216;Zie&#8217; Sevilla&#8217;s Accomplishments</h1>
+        <p class="lede">A snapshot of the work, wins, and progress delivered this term at Kada — placeholder copy below, ready to be swapped with real highlights, metrics, and context.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="hero-avatar">RS</div>
+          <div>
+            <div class="hero-card-name">Raziel &#8216;Zie&#8217; Sevilla</div>
+            <div class="hero-card-role">Junior Mission Specialist &mdash; Product Management</div>
+          </div>
+        </div>
+        <div class="hero-card-rows">
+          <div class="hero-card-row"><span class="k">Squad</span><span class="v">Koach Experience</span></div>
+          <div class="hero-card-row"><span class="k">Manager</span><span class="v">Jorge Fuertes</span></div>
+          <div class="hero-card-row"><span class="k">TL</span><span class="v">Jessielyn Lozano &amp; Seiji Villafranca</span></div>
+          <div class="hero-card-row"><span class="k">Period</span><span class="v">June 2026 – Present</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="title-row">
+          <span class="section-icon section-icon-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,12 8,12 10,6 14,18 16,12 21,12"/></svg></span>
+          <h2>At a Glance</h2>
+        </div>
+        <span class="muted">Headline metrics for the term</span>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-tile">
+          <div class="stat-icon stat-icon-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/></svg></div>
+          <div class="stat-value">5</div>
+          <div class="stat-label">Sprints Involved</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-icon stat-icon-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.07 0l1.42-1.42a5 5 0 0 0-7.07-7.07L10 6"/><path d="M14 11a5 5 0 0 0-7.07 0L5.5 12.4a5 5 0 0 0 7.07 7.07L14 18"/></svg></div>
+          <div class="stat-value">2</div>
+          <div class="stat-label">Cross-Team Initiatives</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-icon stat-icon-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,12 8,12 10,6 14,18 16,12 21,12"/></svg></div>
+          <div class="stat-value">6</div>
+          <div class="stat-label">Team Sessions Facilitated</div>
+        </div>
+        <div class="stat-tile">
+          <div class="stat-icon stat-icon-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></div>
+          <div class="stat-value">1</div>
+          <div class="stat-label">Spearheaded Epic</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="title-row">
+          <span class="section-icon section-icon-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5,13 10,18 19,7"/></svg></span>
+          <h2>Key Accomplishments</h2>
+        </div>
+        <span class="muted">Grouped by focus area</span>
+      </div>
+      <div class="card-grid">
+
+        <div class="card">
+          <div class="card-top">
+            <h3>Sprint Retrospect Facilitation</h3>
+            <span class="pill pill-success"><span class="pill-dot"></span>Ongoing</span>
+          </div>
+          <p>[Add details about this activity — cadence, format, and who's involved.]</p>
+          <div class="impact"><b>Impact:</b> [Add impact or outcome, if any.]</div>
+          <div class="card-foot">
+            <div class="avatar">[Y]</div>
+            <span>Facilitation · Recurring</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <h3>Bi-Weekly Sync Facilitation</h3>
+            <span class="pill pill-success"><span class="pill-dot"></span>Ongoing</span>
+          </div>
+          <p>[Add details about this activity — cadence, format, and who's involved.]</p>
+          <div class="impact"><b>Impact:</b> [Add impact or outcome, if any.]</div>
+          <div class="card-foot">
+            <div class="avatar">[Y]</div>
+            <span>Facilitation · Recurring</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <h3>Squad Asynchronous Check-Ins</h3>
+            <span class="pill pill-success"><span class="pill-dot"></span>Ongoing</span>
+          </div>
+          <p>[Add details about this activity — cadence, format, and who's involved.]</p>
+          <div class="impact"><b>Impact:</b> [Add impact or outcome, if any.]</div>
+          <div class="card-foot">
+            <div class="avatar">[Y]</div>
+            <span>Facilitation · Recurring</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <h3>Kadapunan Facilitation</h3>
+            <span class="pill pill-success"><span class="pill-dot"></span>Completed</span>
+          </div>
+          <p>[Add details about this activity — what it involved and who it was for.]</p>
+          <div class="impact"><b>Impact:</b> [Add impact or outcome, if any.]</div>
+          <div class="card-foot">
+            <div class="avatar">[Y]</div>
+            <span>Facilitation · Sept. 04, 2026</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <h3>Koach Admin Scoping Process</h3>
+            <span class="pill pill-warning"><span class="pill-dot"></span>In Progress</span>
+          </div>
+          <p>[Add details about this activity — what it involves and who it's for.]</p>
+          <div class="impact"><b>Impact:</b> [Add impact or outcome, if any.]</div>
+          <div class="card-foot">
+            <div class="avatar">[Y]</div>
+            <span>Product · Ongoing</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <h3>Kadaversary Game Master</h3>
+            <span class="pill pill-success"><span class="pill-dot"></span>Completed</span>
+          </div>
+          <p>[Add details about this activity — what it involved and who it was for.]</p>
+          <div class="impact"><b>Impact:</b> [Add impact or outcome, if any.]</div>
+          <div class="card-foot">
+            <div class="avatar">[Y]</div>
+            <span>[Category] · [Date or Sprint]</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <h3>Wadhwani Program Series 2 — Products Lead</h3>
+            <span class="pill pill-success"><span class="pill-dot"></span>Ongoing</span>
+          </div>
+          <p>[Add details about this activity — what it involves and who it's for.]</p>
+          <div class="impact"><b>Impact:</b> [Add impact or outcome, if any.]</div>
+          <div class="card-foot">
+            <div class="avatar">[Y]</div>
+            <span>Growth · Ongoing</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="title-row">
+          <span class="section-icon section-icon-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,6 15,12 9,18"/></svg></span>
+          <h2>Looking Ahead</h2>
+        </div>
+        <span class="muted">Goals for the remainder of the term</span>
+      </div>
+      <div class="goal-list">
+        <div class="goal-row">
+          <span class="num">1</span>
+          <div>
+            <div class="title">Post-Event Tasks for the Wadhwani Program Series 2</div>
+            <div class="sub">[Brief note on why this matters / how it will be measured]</div>
+          </div>
+          <span class="status pill pill-warning"><span class="pill-dot"></span>Planned</span>
+        </div>
+        <div class="goal-row">
+          <span class="num">2</span>
+          <div>
+            <div class="title">Design and Development of Koach Admin</div>
+            <div class="sub">[Brief note on why this matters / how it will be measured]</div>
+          </div>
+          <span class="status pill pill-warning"><span class="pill-dot"></span>Planned</span>
+        </div>
+        <div class="goal-row">
+          <span class="num">3</span>
+          <div>
+            <div class="title">Sprint Planning Activities</div>
+            <div class="sub">[Brief note on why this matters / how it will be measured]</div>
+          </div>
+          <span class="status pill pill-warning"><span class="pill-dot"></span>Planned</span>
+        </div>
+        <div class="goal-row">
+          <span class="num">4</span>
+          <div>
+            <div class="title">More Facilitation Roles</div>
+            <div class="sub">[Brief note on why this matters / how it will be measured]</div>
+          </div>
+          <span class="status pill pill-warning"><span class="pill-dot"></span>Planned</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="title-row">
+          <span class="section-icon section-icon-secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
+          <h2>Self Reflection</h2>
+        </div>
+        <span class="muted">A short note in your own words</span>
+      </div>
+      <div class="reflection">
+        <h3>What went well</h3>
+        <p>[Placeholder — describe the wins you're most proud of this term and why they mattered.]</p>
+        <h3>What I'd do differently</h3>
+        <p>[Placeholder — describe a challenge, blocker, or lesson learned and how you're applying it going forward.]</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>KadaKareer — Midterm Accomplishments Report</span>
+      <span>Prepared by Raziel &#8216;Zie&#8217; Sevilla · [Date]</span>
+    </div>
+  </footer>
+
+</body>
+</html>
